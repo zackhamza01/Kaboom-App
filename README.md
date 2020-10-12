@@ -1,10 +1,10 @@
-#Prototype Music Application
+#Kaboom Music Application
 
 ##Purpose
 
 **What will my application do?**
 - This application will allow users to create *playlists*
-- Users can insert *songs* into the playlist of their choice
+- Users can insert songs into the playlist of their choice
 - Users can play songs by adding a playlist or any other song of their liking to the queue
 
 **Who will use it?**
