@@ -18,10 +18,13 @@
 ##User Stories
 - As a user, I want to be able to create a playlist
 - As a user, I want to be able to add songs to an existing playlist
-- As a user, I want to be able to create a queue to play songs
+- As a user, I want to be able to make a queue to play songs
 - As a user, I want to be able to add an existing playlist to the queue
 - As a user, I want to be able to add a shuffled version of a playlist to the queue
 - As a user, I want to be able to add songs to the queue
-- As a user, I want to be able to view my queue and playlist(s)
+- As a user, I want to be able to view the songs in my queue and playlist(s)
+- As a user, I want to be able to know the number of songs in my queue and playlist(s)
+- As a user, I want to be able to remove a song from the queue or a playlist
+- As a user, I want to be able to play the first song in the queue, then the queue should remove that song after it is played
 
 
