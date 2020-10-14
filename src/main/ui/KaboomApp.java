@@ -3,6 +3,7 @@ package ui;
 import model.*;
 import java.util.Scanner;
 
+//Kaboom Application
 public class KaboomApp {
     private Library lib;
     private Queue queue;
@@ -13,10 +14,13 @@ public class KaboomApp {
     private Song song5;
     private Scanner input;
 
+    // EFFECTS: runs the Kaboom application
     public KaboomApp() {
         runKaboom();
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user input
     private void runKaboom() {
         System.out.println("Welcome to the Kaboom App! Hope you enjoy!");
         boolean keepGoing = true;
@@ -42,6 +46,8 @@ public class KaboomApp {
         System.out.println("\nGoodbye!");
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user command
     private void processCommand(String command) {
         if (command.equals("createplaylist")) {
             createPlaylist();
@@ -57,11 +63,15 @@ public class KaboomApp {
             addSong(queue);
         } else if (command.equals("viewplaylist")) {
             songInPlaylist();
+        } else if (command.equals("play")) {
+            play();
         } else {
             System.out.println("Selection not valid...");
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes Library, Queue, and sample Songs
     private void init() {
         lib = new Library();
         queue = new Queue();
@@ -73,6 +83,8 @@ public class KaboomApp {
         input = new Scanner(System.in);
     }
 
+    // EFFECTS: displays menu of options to user
+
     private void displayMenu() {
         System.out.println("\nSelect from the following: ");
         System.out.println("\tcreateplaylist -> Create a playlist in your library");
@@ -82,8 +94,12 @@ public class KaboomApp {
         System.out.println("\taddshuffledplaylisttoqueue -> Add a shuffled playlist from your library to your queue");
         System.out.println("\taddsongtoqueue -> Add a song to your queue");
         System.out.println("\tviewplaylist -> View the songs in a playlist");
+        System.out.println("\tplay -> play first song from queue");
         System.out.println("\tquit -> quit the application");
     }
+
+    // MODIFIES: this
+    // EFFECTS: creates a playlist in Library
 
     private void createPlaylist() {
         System.out.println("Enter the name of this playlist: ");
@@ -97,6 +113,9 @@ public class KaboomApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: renames a playlist
+
     private void renamePlaylist() {
         Scanner input2 = new Scanner(System.in);
         System.out.println("Pick a playlist from your library: ");
@@ -109,6 +128,8 @@ public class KaboomApp {
         lib.getLibrary().get(plselection).rename(name2);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds a song to a playlist of the user's choice
     private void addSongToPlaylist() {
         if (lib.getLibrary().isEmpty()) {
             System.out.println("There are no playlists in your library...");
@@ -125,9 +146,15 @@ public class KaboomApp {
         }
     }
 
+    // EFFECTS: Helper method to select a playlist based on user input
+
     private Playlist selectPlaylist(int index) {
         return lib.getLibrary().get(index);
     }
+
+    // MODIFIES: this
+    // EFFECTS: Adds a song either to a playlist or the queue,
+    //            depending on the parameter
 
     private void addSong(Playlist p) {
         Scanner input2 = new Scanner(System.in);
@@ -157,6 +184,8 @@ public class KaboomApp {
         System.out.println("Song has been added to queue");
     }
 
+    // EFFECTS: Helper method to process song selection based off user input
+
     private Song songSelection(String command) {
         if (command.equals("1")) {
             return song1;
@@ -181,6 +210,8 @@ public class KaboomApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: Copies every song from a playlist and adds it to the queue
     private void addPlaylistToQueue() {
         Scanner input2 = new Scanner(System.in);
         System.out.println("Pick a playlist from your library to add to queue: ");
@@ -192,6 +223,8 @@ public class KaboomApp {
         System.out.println(selectPlaylist(plselection).getPlaylistName() + " has been added to queue");
     }
 
+    // MODIFIES: this
+    // EFFECTS: Same as the previous method, but the songs in the playlist are now shufflled
     private void addShuffledPlaylistToQueue() {
         Scanner input2 = new Scanner(System.in);
         System.out.println("Pick a playlist from your library to add to queue: ");
@@ -203,6 +236,10 @@ public class KaboomApp {
         String playlistname = selectPlaylist(plselection).getPlaylistName();
         System.out.println("Shuffled version of " + playlistname + " has been added to the queue");
     }
+
+    // EFFECTS: Prints out the status on the number of playlists in library
+    //          and number of songs in the queue. Also prints out
+    //          the playlist names in library and song names in queue
 
     private void appStatus() {
         if (lib.getLibrary().isEmpty()) {
@@ -219,6 +256,8 @@ public class KaboomApp {
         }
     }
 
+    // EFFECTS: Gives a representation of the songs in a playlist
+
     private void songInPlaylist() {
         Scanner input2 = new Scanner(System.in);
         System.out.println("Pick a playlist from your library: ");
@@ -229,7 +268,13 @@ public class KaboomApp {
         System.out.println(selectPlaylist(plselection).viewPlaylist());
     }
 
+    // MODIFIES: this
+    // EFFECTS: Removes the first song in the queue and updates the queue
 
-
+    private void play() {
+        System.out.println("Playing first song in queue...");
+        queue.play();
+        System.out.println("First song has finished!");
+    }
 
 }
