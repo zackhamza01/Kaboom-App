@@ -74,7 +74,7 @@ public class Queue implements SongList {
      * EFFECTS: The method checks if the Song object is in the queue,
      *          then removes it if found.
      */
-
+/*
     @Override
     public void removeSong(Song song) {
         if (this.queue.contains(song)) {

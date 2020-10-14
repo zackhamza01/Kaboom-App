@@ -51,13 +51,13 @@ public class Playlist implements SongList {
      * EFFECTS: The method checks if the Song object is in the playlist,
      *          then removes it if found.
      */
-    @Override
+ /*   @Override
     public void removeSong(Song song) {
         if (this.playlist.contains(song))  {
             this.playlist.remove(song);
         }
     }
-
+*/
     /*
     @Override
     public void removeSong(String name) {

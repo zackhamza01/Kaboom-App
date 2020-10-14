@@ -24,9 +24,7 @@
 - As a user, I want to be able to add songs to the queue
 - As a user, I want to be able to view the songs in my queue and playlist(s)
 - As a user, I want to be able to know the number of songs in my queue and playlist(s)
-- As a user, I want to be able to remove a song from the queue or a playlist
 - As a user, I want to be able to play the first song in the queue, then the queue should remove that song after it is played
 - As a user, I want to be able to make a library for my playlists
-- As a user, I want to be able to delete a playlist from my library
 - As a user, I want to be able to rename a playlist
 

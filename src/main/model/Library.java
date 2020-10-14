@@ -35,7 +35,7 @@ public class Library {
      * EFFECTS: This methods first checks if the playlist exists in the library.
      *          If it does, the method removes the playlist from the library.
      */
-
+/*
     public void deletePlaylist(Playlist playlist) {
         if (this.library.contains(playlist)) {
             library.remove(playlist);
@@ -47,7 +47,7 @@ public class Library {
      */
 
     public String showPlaylists() {
-        String desc = "Playlists in Library: ";
+        String desc = "Playlist(s) in Library: ";
         for (Playlist p: this.library) {
             desc += p.getPlaylistName() + ", ";
         }
