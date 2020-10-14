@@ -23,6 +23,10 @@ public class Playlist implements SongList {
         return this.playlist;
     }
 
+    public void rename(String name) {
+        this.name = name;
+    }
+
     /*
      * REQUIRES: Either a Song object or both a song name and artist with non-zero lengths
      * MODIFIIES: this
@@ -42,12 +46,10 @@ public class Playlist implements SongList {
     }
 
     /*
-     * REQUIRES: Either a Song object or a song name
+     * REQUIRES: The parameter to be of type Song object
      * MODIFIES: this
-     * EFFECTS: If the parameter is an object, the method checks if the song is in the playlist,
-     *          then removes it if found. If the parameter is a song name, it traverses the playlist
-     *          and checks if the given song name is equal to a song name in the playlist. If a song
-     *          in the playlist has the same song name, then it removes it.
+     * EFFECTS: The method checks if the Song object is in the playlist,
+     *          then removes it if found.
      */
     @Override
     public void removeSong(Song song) {
@@ -56,6 +58,7 @@ public class Playlist implements SongList {
         }
     }
 
+    /*
     @Override
     public void removeSong(String name) {
         for (Song song: this.playlist) {
@@ -64,6 +67,7 @@ public class Playlist implements SongList {
             }
         }
     }
+    */
 
     /*
      * EFFECTS: Number of songs in playlist will be returned
@@ -81,7 +85,7 @@ public class Playlist implements SongList {
         for (Song song: this.playlist) {
             desc += song.description() + ", ";
         }
-        desc = desc.substring(0,desc.length() - 2);
+        desc = desc.substring(0, desc.length() - 2);
         return desc;
     }
 }

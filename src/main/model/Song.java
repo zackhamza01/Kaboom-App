@@ -26,6 +26,6 @@ public class Song {
      * EFFECTS: returns a string representation of song
      */
     public String description() {
-        return this.title + "by " + this.artist;
+        return this.title + " by " + this.artist;
     }
 }

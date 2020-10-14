@@ -23,7 +23,7 @@ public class Queue implements SongList {
      * EFFECTS: The method takes every song in the playlist and adds it to the queue
      */
 
-    public void addPlaylist(Playlist playlist) {
+    public void addPlaylistToQueue(Playlist playlist) {
         for (Song song: playlist.getPlaylist()) {
             this.queue.add(song);
         }
@@ -38,7 +38,12 @@ public class Queue implements SongList {
 
     public void addShuffledPlaylist(Playlist playlist) {
         ArrayList<Song> shuffledpl = playlist.getPlaylist();
-        Collections.shuffle(shuffledpl);
+        for (int i = 0; i < shuffledpl.size(); i++) {
+            int randindex = (int)(Math.random() * (shuffledpl.size()));
+            Song randvalue = shuffledpl.get(randindex);
+            shuffledpl.set(randindex, shuffledpl.get(i));
+            shuffledpl.set(i, randvalue);
+        }
         for (Song song: shuffledpl) {
             this.queue.add(song);
         }
@@ -64,12 +69,10 @@ public class Queue implements SongList {
     }
 
     /*
-     * REQUIRES: Either a Song object or a song name
+     * REQUIRES: The parameter to be of type Song object
      * MODIFIES: this
-     * EFFECTS: If the parameter is an object, the method checks if the song is in the queue,
-     *          then removes it if found. If the parameter is a song name, it traverses the queue
-     *          and checks if the given song name is equal to a song name in the queue. If a song
-     *          in the queue has the same song name, then it removes it.
+     * EFFECTS: The method checks if the Song object is in the queue,
+     *          then removes it if found.
      */
 
     @Override
@@ -78,7 +81,7 @@ public class Queue implements SongList {
             this.queue.remove(song);
         }
     }
-
+/*
     @Override
     public void removeSong(String name) {
         for (Song s: this.queue) {
@@ -87,7 +90,7 @@ public class Queue implements SongList {
             }
         }
     }
-
+*/
     /*
      * REQUIRES: queue.size() > 0, in other words there should be at least one song remaining in queue
      * MODIFIES: this
@@ -102,7 +105,7 @@ public class Queue implements SongList {
      * EFFECTS: Number of songs in queue will be returned
      */
 
-    public String viewPlaylistSize() {
+    public String viewQueueSize() {
         return "There are " + this.queue.size() + " songs in Queue";
     }
 
@@ -115,7 +118,7 @@ public class Queue implements SongList {
         for (Song s: this.queue) {
             desc += s.description() + ", ";
         }
-        desc = desc.substring(0,desc.length() - 2);
+        desc = desc.substring(0, desc.length() - 2);
         return desc;
     }
 
