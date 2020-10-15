@@ -106,7 +106,7 @@ public class Queue implements SongList {
      */
 
     public String viewQueueSize() {
-        return "There are " + this.queue.size() + " songs in Queue";
+        return "There is " + this.queue.size() + " song(s) in Queue";
     }
 
     /*
@@ -114,7 +114,7 @@ public class Queue implements SongList {
      */
 
     public String viewQueue() {
-        String desc = "Songs in Queue: ";
+        String desc = "Song(s) in Queue: ";
         for (Song s: this.queue) {
             desc += s.description() + ", ";
         }

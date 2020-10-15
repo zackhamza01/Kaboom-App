@@ -81,7 +81,7 @@ public class Playlist implements SongList {
      * EFFECTS: All the songs in playlist will be returned in string representation
      */
     public String viewPlaylist() {
-        String desc = "Songs in " + this.name + ": ";
+        String desc = "Song(s) in " + this.name + ": ";
         for (Song song: this.playlist) {
             desc += song.description() + ", ";
         }

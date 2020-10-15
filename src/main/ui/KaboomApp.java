@@ -22,13 +22,14 @@ public class KaboomApp {
     // MODIFIES: this
     // EFFECTS: processes user input
     private void runKaboom() {
-        System.out.println("Welcome to the Kaboom App! Hope you enjoy!");
+        System.out.println("Welcome to the Kaboom App! Hope you enjoy :)");
         boolean keepGoing = true;
         String command = null;
 
         init();
 
         while (keepGoing) {
+            appStatus();
             displayMenu();
             command = input.nextLine();
             command = command.toLowerCase();
@@ -37,7 +38,6 @@ public class KaboomApp {
                 keepGoing = false;
             } else {
                 processCommand(command);
-                appStatus();
             }
 
 
@@ -46,14 +46,17 @@ public class KaboomApp {
         System.out.println("\nGoodbye!");
     }
 
-    // REQUIRES: User to type in a valid response
     // MODIFIES: this
     // EFFECTS: processes user command
     private void processCommand(String command) {
         if (command.equals("createplaylist")) {
             createPlaylist();
         } else if (command.equals("renameplaylist")) {
-            renamePlaylist();
+            if (lib.getLibrary().size() == 0) {
+                System.out.println("You have no playlists in library to rename.");
+            } else {
+                renamePlaylist();
+            }
         } else if (command.equals("addsongtoplaylist")) {
             addSongToPlaylist();
         } else if (command.equals("addplaylisttoqueue")) {
@@ -66,6 +69,8 @@ public class KaboomApp {
             songInPlaylist();
         } else if (command.equals("play")) {
             play();
+        } else {
+            System.out.println("Selection not valid...");
         }
     }
 
@@ -104,28 +109,33 @@ public class KaboomApp {
         System.out.println("Enter the name of this playlist: ");
         String name = input.nextLine();
 
-        if (name.length() == 0) {
-            System.out.println("Name cannot be empty...\n");
-        } else {
-            lib.addPlaylistToLibrary(new Playlist(name));
-            System.out.println("Playlist successfully added to library!");
+        while (name.length() == 0) {
+            System.out.println("Name cannot be empty. Try again: ");
+            name = input.nextLine();
         }
+
+        lib.addPlaylistToLibrary(new Playlist(name));
+        System.out.println("Playlist successfully added to your library!");
     }
 
-    // REQUIRES: Name of playlist to be renamed to not be empty
     // MODIFIES: this
     // EFFECTS: renames a playlist
 
     private void renamePlaylist() {
-        Scanner input2 = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         System.out.println("Pick a playlist from your library: ");
         for (int i = 0; i < lib.getLibrary().size(); i++) {
             System.out.println("\t" + (i + 1) + " -> " + lib.getLibrary().get(i).getPlaylistName());
         }
         int plselection = input.nextInt() - 1;
         System.out.println("Rename " + selectPlaylist(plselection).getPlaylistName() + " to: ");
-        String name2 = input2.nextLine();
+        String name2 = input.nextLine();
+        while (name2.length() == 0) {
+            System.out.println("Name cannot be empty. Try another name!");
+            name2 = input.nextLine();
+        }
         lib.getLibrary().get(plselection).rename(name2);
+        System.out.println("Successfully renamed the playlist!");
     }
 
     // MODIFIES: this
@@ -135,7 +145,6 @@ public class KaboomApp {
             System.out.println("There are no playlists in your library...");
         } else if (lib.getLibrary().size() == 1) {
             addSong(lib.getLibrary().get(0));
-            System.out.println("Song has been successfully added to " + lib.getLibrary().get(0).getPlaylistName());
         } else {
             System.out.println("Pick a playlist from your library: ");
             for (int i = 0; i < lib.getLibrary().size(); i++) {
@@ -159,34 +168,33 @@ public class KaboomApp {
     //            depending on the parameter
 
     private void addSong(Playlist p) {
-        Scanner input2 = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         System.out.println("\nSelect from these songs to add: ");
         System.out.println("\t1 for -> " + song1.description());
         System.out.println("\t2 for -> " + song2.description());
         System.out.println("\t3 for -> " + song3.description());
         System.out.println("\t4 for -> " + song4.description());
         System.out.println("\t5 for -> " + song5.description());
-        System.out.println("\tcustom -> A song of your choice");
-        String songselection = input2.nextLine();
+        System.out.println("\tCustom -> A song of your choice");
+        String songselection = input.nextLine();
         p.addSong(songSelection(songselection));
-        System.out.println("Song has been successfully added to " + p.getPlaylistName());
+        System.out.println("Song has been added to " + p.getPlaylistName() + "!");
     }
 
     private void addSong(Queue q) {
-        Scanner input2 = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         System.out.println("\nSelect from these songs to add: ");
         System.out.println("\t1 for -> " + song1.description());
         System.out.println("\t2 for -> " + song2.description());
         System.out.println("\t3 for -> " + song3.description());
         System.out.println("\t4 for -> " + song4.description());
         System.out.println("\t5 for -> " + song5.description());
-        System.out.println("\tcustom -> A song of your choice");
-        String songselection = input2.nextLine();
+        System.out.println("\tCustom -> A song of your choice");
+        String songselection = input.nextLine();
         q.addSong(songSelection(songselection));
-        System.out.println("Song has been added to queue");
+        System.out.println("Song has been added to queue!");
     }
 
-    // REQUIRES: User to put a valid selection
     // EFFECTS: Helper method to process song selection based off user input
 
     private Song songSelection(String command) {
@@ -200,17 +208,29 @@ public class KaboomApp {
             return song4;
         } else if (command.equals("5")) {
             return song5;
-        } else if (command.equals("custom")) {
-            Scanner console = new Scanner(System.in);
-            System.out.println("Name of the song: ");
-            String name = console.nextLine();
-            System.out.println("Artist name: ");
-            String artist = console.nextLine();
-            return new Song(name, artist);
+        } else if (command.toLowerCase().equals("custom")) {
+            return custom();
         } else {
             System.out.println("No valid selection...");
             return null;
         }
+    }
+
+    private Song custom() {
+        input = new Scanner(System.in);
+        System.out.println("Name of the song: ");
+        String name = input.nextLine();
+        while (name.length() == 0) {
+            System.out.println("Song name cannot be empty! Try again: ");
+            name = input.nextLine();
+        }
+        System.out.println("Artist name: ");
+        String artist = input.nextLine();
+        while (artist.length() == 0) {
+            System.out.println("Artist name cannot be empty! Try again: ");
+            artist = input.nextLine();
+        }
+        return new Song(name, artist);
     }
 
     // REQUIRES: User to enter an appropriate number for playlist and at least one playlist in library
@@ -218,12 +238,12 @@ public class KaboomApp {
     // EFFECTS: Copies every song from a playlist and adds it to the queue
 
     private void addPlaylistToQueue() {
-        Scanner input2 = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         System.out.println("Pick a playlist from your library to add to queue: ");
         for (int i = 0; i < lib.getLibrary().size(); i++) {
             System.out.println("\t" + (i + 1) + " -> " + lib.getLibrary().get(i).getPlaylistName());
         }
-        int plselection = input2.nextInt() - 1;
+        int plselection = input.nextInt() - 1;
         queue.addPlaylistToQueue(selectPlaylist(plselection));
         System.out.println(selectPlaylist(plselection).getPlaylistName() + " has been added to queue");
     }
@@ -232,12 +252,12 @@ public class KaboomApp {
     // EFFECTS: Same as the previous method, but the songs in the playlist are now shufflled
 
     private void addShuffledPlaylistToQueue() {
-        Scanner input2 = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         System.out.println("Pick a playlist from your library to add to queue: ");
         for (int i = 0; i < lib.getLibrary().size(); i++) {
             System.out.println("\t" + (i + 1) + " -> " + lib.getLibrary().get(i).getPlaylistName());
         }
-        int plselection = input2.nextInt() - 1;
+        int plselection = input.nextInt() - 1;
         queue.addShuffledPlaylist(selectPlaylist(plselection));
         String playlistname = selectPlaylist(plselection).getPlaylistName();
         System.out.println("Shuffled version of " + playlistname + " has been added to the queue");
@@ -249,13 +269,13 @@ public class KaboomApp {
 
     private void appStatus() {
         if (lib.getLibrary().isEmpty()) {
-            System.out.println("There are no playlists in library");
+            System.out.println("\nThere are no playlists in library.");
         } else {
-            System.out.println("There are " + lib.getLibrary().size() + " playlist(s) in your library");
+            System.out.println("\nThere is " + lib.getLibrary().size() + " playlist(s) in your library.");
             System.out.println(lib.showPlaylists());
         }
         if (queue.getQueue().isEmpty()) {
-            System.out.println("The queue is empty");
+            System.out.println("The queue is empty.");
         } else {
             System.out.println(queue.viewQueueSize());
             System.out.println(queue.viewQueue());
@@ -265,23 +285,27 @@ public class KaboomApp {
     // EFFECTS: Gives a representation of the songs in a playlist
 
     private void songInPlaylist() {
-        Scanner input2 = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         System.out.println("Pick a playlist from your library: ");
         for (int i = 0; i < lib.getLibrary().size(); i++) {
             System.out.println("\t" + (i + 1) + " -> " + lib.getLibrary().get(i).getPlaylistName());
         }
-        int plselection = input2.nextInt() - 1;
+        int plselection = input.nextInt() - 1;
         System.out.println(selectPlaylist(plselection).viewPlaylist());
     }
 
-    // REQUIRES: At least one song in queue
     // MODIFIES: this
     // EFFECTS: Removes the first song in the queue and updates the queue
 
     private void play() {
-        System.out.println("Playing first song in queue...");
-        queue.play();
-        System.out.println("First song has finished!");
+        if (queue.getQueue().size() == 0) {
+            System.out.println("There are no songs to play in queue.");
+        } else {
+            String firstsong = queue.getQueue().get(0).description();
+            System.out.println("Playing " + firstsong + "...");
+            queue.play();
+            System.out.println("Done playing " + firstsong + "!");
+        }
     }
 
 }

@@ -53,7 +53,7 @@ class KaboomTest {
         p.addSong(song1);
         p.addSong(song2);
         p.addSong(song3);
-        assertEquals("Songs in Hip-Hop: Over by Drake, Lose Yourself by Eminem, Look Back at It by A Boogie", p.viewPlaylist());
+        assertEquals("Song(s) in Hip-Hop: Over by Drake, Lose Yourself by Eminem, Look Back at It by A Boogie", p.viewPlaylist());
     }
 
     @Test
@@ -64,8 +64,8 @@ class KaboomTest {
         p.addSong(song2);
         p.addSong(song3);
         q.addPlaylistToQueue(p);
-        assertEquals("There are 3 songs in Queue", q.viewQueueSize());
-        assertEquals("Songs in Queue: Over by Drake, Lose Yourself by Eminem, Look Back at It by A Boogie", q.viewQueue());
+        assertEquals("There is 3 song(s) in Queue", q.viewQueueSize());
+        assertEquals("Song(s) in Queue: Over by Drake, Lose Yourself by Eminem, Look Back at It by A Boogie", q.viewQueue());
     }
 
     @Test
@@ -76,7 +76,7 @@ class KaboomTest {
         p.addSong(song2);
         p.addSong(song3);
         q.addShuffledPlaylist(p);
-        assertTrue(q.viewQueue().contains("Songs in Queue: "));
+        assertTrue(q.viewQueue().contains("Song(s) in Queue: "));
     }
 
     @Test
@@ -87,7 +87,7 @@ class KaboomTest {
         p.addSong(song2);
         q.addPlaylistToQueue(p);
         q.addSong("Dreaming", "Smallpools");
-        assertEquals("Songs in Queue: Over by Drake, Lose Yourself by Eminem, Dreaming by Smallpools", q.viewQueue());
+        assertEquals("Song(s) in Queue: Over by Drake, Lose Yourself by Eminem, Dreaming by Smallpools", q.viewQueue());
     }
 /*
     @Test
@@ -107,9 +107,9 @@ class KaboomTest {
         q.addSong(song1);
         q.addSong(song2);
         q.addSong(song3);
-        assertEquals("There are 3 songs in Queue", q.viewQueueSize());
+        assertEquals("There is 3 song(s) in Queue", q.viewQueueSize());
         q.play();
-        assertEquals("There are 2 songs in Queue", q.viewQueueSize());
+        assertEquals("There is 2 song(s) in Queue", q.viewQueueSize());
     }
 
     @Test
@@ -129,7 +129,7 @@ class KaboomTest {
         p3.addSong("What is Love?", "Haddaway");
         p3.addSong("Grenade", "Bruno Mars");
         assertEquals("Playlist(s) in Library: Rap, French Songs, Oldies", lib.showPlaylists());
-        assertEquals("Songs in French Songs: Angela by Hatik, C'est la vie by Khaled", lib.getLibrary().get(1).viewPlaylist());
+        assertEquals("Song(s) in French Songs: Angela by Hatik, C'est la vie by Khaled", lib.getLibrary().get(1).viewPlaylist());
     }
 /*
     @Test
