@@ -24,9 +24,7 @@ public class Library {
      */
 
     public void addPlaylistToLibrary(Playlist playlist) {
-        if (!(this.library.contains(playlist))) {
-            this.library.add(playlist);
-        }
+        this.library.add(playlist);
     }
 
     /*

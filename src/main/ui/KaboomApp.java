@@ -79,7 +79,7 @@ public class KaboomApp {
         song2 = new Song("Perfect", "Ed Sheeran");
         song3 = new Song("Lose Yourself", "Eminem");
         song4 = new Song("Africa", "Toto");
-        song5 = new Song("Forever", "Chris Brown");
+        song5 = new Song("Beats", "Chris Brown ft. Rihanna");
         input = new Scanner(System.in);
     }
 
