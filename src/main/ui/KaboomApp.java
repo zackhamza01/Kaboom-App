@@ -322,6 +322,7 @@ public class KaboomApp {
         }
     }
 
+    // EFFECTS: saves the music to library and queue file
     private void saveMusic() {
         try {
             jsonWriter.open();
@@ -334,6 +335,9 @@ public class KaboomApp {
             System.out.println("Unable to write file");
         }
     }
+
+    // MODIFIES: this
+    // EFFECTS: loads music from library and queue file
 
     private void loadMusic() {
         try {

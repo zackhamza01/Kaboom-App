@@ -93,6 +93,7 @@ public class Playlist implements SongList, Writable {
         return desc;
     }
 
+    // EFFECTS: Returns Playlist as JSONObject
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -101,6 +102,7 @@ public class Playlist implements SongList, Writable {
         return json;
     }
 
+    // EFFECTS: Returns songs in Playlist as a JSON Array
     private JSONArray songsToPlaylistJson() {
         JSONArray jsonArray = new JSONArray();
 

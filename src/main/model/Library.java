@@ -57,12 +57,16 @@ public class Library implements Writable {
         return desc;
     }
 
+    // EFFECTS: Returns Library as JSONObject
+
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("library", playlistsToJson());
         return json;
     }
+
+    // EFFECTS: Returns playlists in Library as a JSON Array
 
     private JSONArray playlistsToJson() {
         JSONArray jsonArray  = new JSONArray();

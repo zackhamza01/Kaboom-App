@@ -127,12 +127,15 @@ public class Queue implements SongList, Writable {
     }
 
 
+    // EFFECTS: Returns queue as a JSONObject
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("queue", songsToQueueJson());
         return json;
     }
+
+    // EFFECTS: Returns songs in Queue as a JSON array
 
     private JSONArray songsToQueueJson() {
         JSONArray jsonArray = new JSONArray();

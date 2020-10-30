@@ -32,6 +32,7 @@ public class Song implements Writable {
         return this.title + " by " + this.artist;
     }
 
+    // EFFECTS: Returns Song as a JSONObject
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

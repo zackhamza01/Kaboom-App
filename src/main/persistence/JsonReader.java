@@ -16,17 +16,22 @@ public class JsonReader {
     private String librarySource;
     private String queueSource;
 
+    // EFFECTS: constructs reader to read from source files
     public JsonReader(String librarySource, String queueSource) {
         this.librarySource = librarySource;
         this.queueSource = queueSource;
     }
 
+    // EFFECTS: Reads library from file and returns it
+    // throws IOException if an error occurs reading data from file
     public Library readLibrary() throws IOException {
         String jsonData = readFile(librarySource);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseLibrary(jsonObject);
     }
 
+    // EFFECTS: Reads queue from file and returns it
+    // throws IOException if an error occurs reading data from file
     public Queue readQueue() throws IOException {
         String jsonData = readFile(queueSource);
         JSONObject jsonObject = new JSONObject(jsonData);
@@ -44,6 +49,8 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
+    // EFFECTS: Parses library from JSON object and returns it
+
     private Library parseLibrary(JSONObject jsonObject) {
         Library library = new Library();
         JSONArray jsonLibrary = jsonObject.getJSONArray("library");
@@ -52,6 +59,8 @@ public class JsonReader {
         }
         return library;
     }
+
+    // EFFECTS: Parses songs from JSON Object and adds them to playlist
 
     private Playlist parsePlayList(JSONObject jsonObject) {
         Playlist temp = new Playlist(jsonObject.getString("name"));
@@ -63,11 +72,16 @@ public class JsonReader {
         return temp;
     }
 
+    // EFFECTS: Parses queue from JSON Object and returns it
+
     private Queue parseQueue(JSONObject jsonObject) {
         Queue queue = new Queue();
         addSongs(queue, jsonObject);
         return queue;
     }
+
+    // MODIFIES: queue
+    // EFFECTS: Parses songs from JSON Object and adds to queue
 
     private void addSongs(Queue queue, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("queue");
@@ -76,6 +90,9 @@ public class JsonReader {
             addSong(queue, nextSong);
         }
     }
+
+    // MODIFIES: queue
+    // EFFECTS: Parses song from JSON Object and adds it to queue
 
     private void addSong(Queue queue, JSONObject jsonObject) {
         String title = jsonObject.getString("title");
