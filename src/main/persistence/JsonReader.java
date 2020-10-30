@@ -63,23 +63,13 @@ public class JsonReader {
     // EFFECTS: Parses songs from JSON Object and adds them to playlist
 
     private Playlist parsePlayList(JSONObject jsonObject) {
-        Playlist playlist = new Playlist(jsonObject.getString("name"));
-        JSONArray songlist = jsonObject.getJSONArray("playlist");
-        for (Object jsonSong : songlist) {
-            JSONObject nextSong = (JSONObject) jsonSong;
-            addSongPlaylist(playlist, nextSong);
+        Playlist temp = new Playlist(jsonObject.getString("name"));
+        JSONArray jsonSongsArray = jsonObject.getJSONArray("playlist");
+        for (Object jsonSong : jsonSongsArray) {
+            JSONObject tempSong = (JSONObject) jsonSong;
+            temp.addSong(new Song(tempSong.getString("title"), tempSong.getString("artist")));
         }
-        return playlist;
-    }
-
-    // MODIFIES: playlist
-    // EFFECTS: Parses song from playlist and adds it to playlist
-
-    private void addSongPlaylist(Playlist playlist, JSONObject jsonObject) {
-        String title = jsonObject.getString("title");
-        String artist = jsonObject.getString("artist");
-        Song song = new Song(title, artist);
-        playlist.addSong(song);
+        return temp;
     }
 
     // EFFECTS: Parses queue from JSON Object and returns it
