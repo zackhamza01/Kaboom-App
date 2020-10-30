@@ -1,8 +1,12 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
-public class Playlist implements SongList {
+public class Playlist implements SongList, Writable {
     private String name;    //The name of the playlist
     private ArrayList<Song> playlist;    //The playlist will contain a list of songs
 
@@ -87,6 +91,24 @@ public class Playlist implements SongList {
         }
         desc = desc.substring(0, desc.length() - 2);
         return desc;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("playlist", songsToPlaylistJson());
+        return json;
+    }
+
+    private JSONArray songsToPlaylistJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Song song: playlist) {
+            jsonArray.put(song.toJson());
+        }
+
+        return jsonArray;
     }
 }
 

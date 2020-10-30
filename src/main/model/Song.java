@@ -1,6 +1,9 @@
 package model;
 
-public class Song {
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class Song implements Writable {
     private String title;   //the song title
     private String artist;  //the song artist's name
 
@@ -27,5 +30,13 @@ public class Song {
      */
     public String description() {
         return this.title + " by " + this.artist;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("title", title);
+        json.put("artist", artist);
+        return json;
     }
 }

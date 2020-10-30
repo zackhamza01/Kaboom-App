@@ -1,8 +1,12 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
-public class Library {
+public class Library implements Writable {
     private ArrayList<Playlist> library;
 
     /*
@@ -51,6 +55,23 @@ public class Library {
         }
         desc = desc.substring(0, desc.length() - 2);
         return desc;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("library", playlistsToJson());
+        return json;
+    }
+
+    private JSONArray playlistsToJson() {
+        JSONArray jsonArray  = new JSONArray();
+
+        for (Playlist p: library) {
+            jsonArray.put(p.toJson());
+        }
+
+        return jsonArray;
     }
 
 

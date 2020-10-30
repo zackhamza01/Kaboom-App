@@ -1,10 +1,17 @@
 package ui;
 
 import model.*;
+import persistence.JsonReader;
+import persistence.JsonWriter;
+
 import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 //Kaboom Application
 public class KaboomApp {
+    private static final String JSONLIBRARY_STORE = "./data/library.json";
+    private static final String JSONQUEUE_STORE = "./data/queue.json";
     private Library lib;
     private Queue queue;
     private Song song1;
@@ -14,8 +21,11 @@ public class KaboomApp {
     private Song song5;
     private Scanner input;
 
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+
     // EFFECTS: runs the Kaboom application
-    public KaboomApp() {
+    public KaboomApp() throws FileNotFoundException {
         runKaboom();
     }
 
@@ -52,11 +62,7 @@ public class KaboomApp {
         if (command.equals("createplaylist")) {
             createPlaylist();
         } else if (command.equals("renameplaylist")) {
-            if (lib.getLibrary().size() == 0) {
-                System.out.println("You have no playlists in library to rename.");
-            } else {
-                renamePlaylist();
-            }
+            renamePlaylist();
         } else if (command.equals("addsongtoplaylist")) {
             addSongToPlaylist();
         } else if (command.equals("addplaylisttoqueue")) {
@@ -69,6 +75,10 @@ public class KaboomApp {
             songInPlaylist();
         } else if (command.equals("play")) {
             play();
+        } else if (command.equals("save")) {
+            saveMusic();
+        } else if (command.equals("load")) {
+            loadMusic();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -85,6 +95,8 @@ public class KaboomApp {
         song4 = new Song("Africa", "Toto");
         song5 = new Song("Beats", "Chris Brown ft. Rihanna");
         input = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSONLIBRARY_STORE, JSONQUEUE_STORE);
+        jsonReader = new JsonReader(JSONLIBRARY_STORE, JSONQUEUE_STORE);
     }
 
     // EFFECTS: displays menu of options to user
@@ -99,6 +111,8 @@ public class KaboomApp {
         System.out.println("\taddsongtoqueue -> Add a song to your queue");
         System.out.println("\tviewplaylist -> View the songs in a playlist");
         System.out.println("\tplay -> play first song from queue");
+        System.out.println("\tsave -> save music database to file");
+        System.out.println("\tload -> load music database to file");
         System.out.println("\tquit -> quit the application");
     }
 
@@ -305,6 +319,30 @@ public class KaboomApp {
             System.out.println("Playing " + firstsong + "...");
             queue.play();
             System.out.println("Done playing " + firstsong + "!");
+        }
+    }
+
+    private void saveMusic() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(lib);
+            System.out.println("Saved library to " + JSONLIBRARY_STORE);
+            jsonWriter.write(queue);
+            System.out.println("Saved queue to " + JSONQUEUE_STORE);
+            jsonWriter.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write file");
+        }
+    }
+
+    private void loadMusic() {
+        try {
+            lib = jsonReader.readLibrary();
+            System.out.println("Loaded library from " + JSONLIBRARY_STORE);
+            queue = jsonReader.readQueue();
+            System.out.println("Loaded queue from " + JSONQUEUE_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to write file");
         }
     }
 

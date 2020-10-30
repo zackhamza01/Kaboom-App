@@ -1,8 +1,12 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.*;
 
-public class Queue implements SongList {
+public class Queue implements SongList, Writable {
     private ArrayList<Song> queue;
 
     /*
@@ -123,4 +127,20 @@ public class Queue implements SongList {
     }
 
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("queue", songsToQueueJson());
+        return json;
+    }
+
+    private JSONArray songsToQueueJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Song song: queue) {
+            jsonArray.put(song.toJson());
+        }
+
+        return jsonArray;
+    }
 }
