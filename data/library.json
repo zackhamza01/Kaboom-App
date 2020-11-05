@@ -1,32 +1,29 @@
-{"library": [
-    {
-        "playlist": [
-            {
-                "artist": "Kanye West",
-                "title": "Follow God"
-            },
-            {
-                "artist": "A Boogie",
-                "title": "Look Back At It"
-            },
-            {
-                "artist": "The Weeknd",
-                "title": "AfterHours"
-            }
-        ],
-        "name": "Rap"
-    },
-    {
-        "playlist": [
-            {
-                "artist": "Toto",
-                "title": "Africa"
-            },
-            {
-                "artist": "Ed Sheeran",
-                "title": "Perfect"
-            }
-        ],
-        "name": "Nostalgia"
-    }
-]}
+{"library": [{
+    "playlist": [
+        {
+            "artist": "DaBaby",
+            "title": "Suge"
+        },
+        {
+            "artist": "The Weeknd",
+            "title": "The Hills"
+        },
+        {
+            "artist": "Nav",
+            "title": "Hit"
+        },
+        {
+            "artist": "Eminem",
+            "title": "Lose Yourself"
+        },
+        {
+            "artist": "Roddy Rich",
+            "title": "High Fashion"
+        },
+        {
+            "artist": "The Weeknd",
+            "title": "AfterHours"
+        }
+    ],
+    "name": "Rap"
+}]}

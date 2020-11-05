@@ -35,13 +35,15 @@ public class Queue implements SongList, Writable {
 
     /*
      * REQUIRES: An existing Playlist object
-     * MODIFIES: this
      * EFFECTS: The method copies the content of the playlist, then shuffles the songs in it.
      *          That shuffled playlist is then added to the queue.
      */
 
     public void addShuffledPlaylist(Playlist playlist) {
-        ArrayList<Song> shuffledpl = playlist.getPlaylist();
+        ArrayList<Song> shuffledpl = new ArrayList<>();
+        for (Song s: playlist.getPlaylist()) {
+            shuffledpl.add(s);
+        }
         for (int i = 0; i < shuffledpl.size(); i++) {
             int randindex = (int)(Math.random() * (shuffledpl.size()));
             Song randvalue = shuffledpl.get(randindex);

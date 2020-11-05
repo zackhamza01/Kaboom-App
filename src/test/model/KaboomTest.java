@@ -146,6 +146,21 @@ class KaboomTest {
         assertEquals("Playlist(s) in Library: Rap, French Songs", lib.showPlaylists());
     }
 */
+    @Test
+    void testShuffledPlaylist() {
+        Library lib = new Library();
+        Queue queue = new Queue();
+        Playlist playlist = new Playlist("p1");
+        playlist.addSong(song1);
+        playlist.addSong(song2);
+        playlist.addSong(song3);
+        playlist.addSong("Delilah", "Some Guy");
+        playlist.addSong("All Star", "Big Mouth");
+        lib.addPlaylistToLibrary(playlist);
+        queue.addShuffledPlaylist(playlist);
+        assertNotEquals(playlist.viewPlaylist(), queue.viewQueue());
+
+    }
 
 
 }

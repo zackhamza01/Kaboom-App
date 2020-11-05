@@ -17,8 +17,6 @@ public class KaboomApp {
     private Song song1;
     private Song song2;
     private Song song3;
-    private Song song4;
-    private Song song5;
     private Scanner input;
 
     private JsonWriter jsonWriter;
@@ -56,29 +54,76 @@ public class KaboomApp {
         System.out.println("\nGoodbye!");
     }
 
-    // MODIFIES: this
-    // EFFECTS: processes user command
+    // EFFECTS: displays menu of options to user
+
+    private void displayMenu() {
+        System.out.println("\nSelect from the following: ");
+        System.out.println("\tlibrary -> Access your library");
+        System.out.println("\tqueue -> Access your queue");
+        System.out.println("\tsave -> save music database to file");
+        System.out.println("\tload -> load music database to file");
+        System.out.println("\tquit -> quit the application");
+    }
+
+    private void displayLibraryMenu() {
+        System.out.println("\tcreate -> Create a playlist in your library");
+        System.out.println("\trename -> Rename a playlist in your library");
+        System.out.println("\taddsong -> Add songs to a playlist in your library");
+        System.out.println("\tview -> View the songs in a playlist");
+    }
+
+    private void displayQueueMenu() {
+        System.out.println("\taddplaylist -> Add a playlist from your library to your queue");
+        System.out.println("\taddshuffledplaylist -> Add a shuffled playlist from your library to your queue");
+        System.out.println("\taddsong -> Add a song to your queue");
+        System.out.println("\tplay -> play first song from queue");
+    }
+
+
     private void processCommand(String command) {
-        if (command.equals("createplaylist")) {
-            createPlaylist();
-        } else if (command.equals("renameplaylist")) {
-            renamePlaylist();
-        } else if (command.equals("addsongtoplaylist")) {
-            addSongToPlaylist();
-        } else if (command.equals("addplaylisttoqueue")) {
-            addPlaylistToQueue();
-        } else if (command.equals("addshuffledplaylisttoqueue")) {
-            addShuffledPlaylistToQueue();
-        } else if (command.equals("addsongtoqueue")) {
-            addSong(queue);
-        } else if (command.equals("viewplaylist")) {
-            songInPlaylist();
-        } else if (command.equals("play")) {
-            play();
+        if (command.equals("library")) {
+            displayLibraryMenu();
+            command = input.nextLine();
+            command.toLowerCase();
+            processLibraryCommand(command);
+        } else if (command.equals("queue")) {
+            displayQueueMenu();
+            command = input.nextLine();
+            command.toLowerCase();
+            processQueueCommand(command);
         } else if (command.equals("save")) {
             saveMusic();
         } else if (command.equals("load")) {
             loadMusic();
+        } else {
+            System.out.println("Selection not valid. Try again.");
+        }
+
+    }
+
+    private void processLibraryCommand(String command) {
+        if (command.equals("create")) {
+            createPlaylist();
+        } else if (command.equals("rename")) {
+            renamePlaylist();
+        } else if (command.equals("addsong")) {
+            addSongToPlaylist();
+        } else if (command.equals("view")) {
+            songInPlaylist();
+        } else {
+            System.out.println("Selection not valid...");
+        }
+    }
+
+    private void processQueueCommand(String command) {
+        if (command.equals("addplaylist")) {
+            addPlaylistToQueue();
+        } else if (command.equals("addshuffledplaylist")) {
+            addShuffledPlaylistToQueue();
+        } else if (command.equals("addsong")) {
+            addSong(queue);
+        } else if (command.equals("play")) {
+            play();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -90,30 +135,11 @@ public class KaboomApp {
         lib = new Library();
         queue = new Queue();
         song1 = new Song("AfterHours", "The Weeknd");
-        song2 = new Song("Perfect", "Ed Sheeran");
+        song2 = new Song("Africa", "Toto");
         song3 = new Song("Lose Yourself", "Eminem");
-        song4 = new Song("Africa", "Toto");
-        song5 = new Song("Beats", "Chris Brown ft. Rihanna");
         input = new Scanner(System.in);
         jsonWriter = new JsonWriter(JSONLIBRARY_STORE, JSONQUEUE_STORE);
         jsonReader = new JsonReader(JSONLIBRARY_STORE, JSONQUEUE_STORE);
-    }
-
-    // EFFECTS: displays menu of options to user
-
-    private void displayMenu() {
-        System.out.println("\nSelect from the following: ");
-        System.out.println("\tcreateplaylist -> Create a playlist in your library");
-        System.out.println("\trenameplaylist -> Rename a playlist in your library");
-        System.out.println("\taddsongtoplaylist -> Add songs to a playlist in your library");
-        System.out.println("\taddplaylisttoqueue -> Add a playlist from your library to your queue");
-        System.out.println("\taddshuffledplaylisttoqueue -> Add a shuffled playlist from your library to your queue");
-        System.out.println("\taddsongtoqueue -> Add a song to your queue");
-        System.out.println("\tviewplaylist -> View the songs in a playlist");
-        System.out.println("\tplay -> play first song from queue");
-        System.out.println("\tsave -> save music database to file");
-        System.out.println("\tload -> load music database to file");
-        System.out.println("\tquit -> quit the application");
     }
 
     // MODIFIES: this
@@ -143,6 +169,7 @@ public class KaboomApp {
         }
         int plselection = input.nextInt() - 1;
         System.out.println("Rename " + selectPlaylist(plselection).getPlaylistName() + " to: ");
+        input = new Scanner(System.in);
         String name2 = input.nextLine();
         while (name2.length() == 0) {
             System.out.println("Name cannot be empty. Try another name!");
@@ -187,8 +214,6 @@ public class KaboomApp {
         System.out.println("\t1 for -> " + song1.description());
         System.out.println("\t2 for -> " + song2.description());
         System.out.println("\t3 for -> " + song3.description());
-        System.out.println("\t4 for -> " + song4.description());
-        System.out.println("\t5 for -> " + song5.description());
         System.out.println("\tCustom -> A song of your choice");
         String songselection = input.nextLine();
         p.addSong(songSelection(songselection));
@@ -201,8 +226,6 @@ public class KaboomApp {
         System.out.println("\t1 for -> " + song1.description());
         System.out.println("\t2 for -> " + song2.description());
         System.out.println("\t3 for -> " + song3.description());
-        System.out.println("\t4 for -> " + song4.description());
-        System.out.println("\t5 for -> " + song5.description());
         System.out.println("\tCustom -> A song of your choice");
         String songselection = input.nextLine();
         q.addSong(songSelection(songselection));
@@ -218,10 +241,6 @@ public class KaboomApp {
             return song2;
         } else if (command.equals("3")) {
             return song3;
-        } else if (command.equals("4")) {
-            return song4;
-        } else if (command.equals("5")) {
-            return song5;
         } else if (command.toLowerCase().equals("custom")) {
             return custom();
         } else {
