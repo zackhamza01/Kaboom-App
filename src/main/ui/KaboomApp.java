@@ -341,6 +341,7 @@ public class KaboomApp {
         }
     }
 
+    // MODIFIES: this
     // EFFECTS: saves the music to library and queue file
     private void saveMusic() {
         try {
