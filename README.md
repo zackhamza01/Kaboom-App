@@ -29,3 +29,7 @@
 - As a user, I want to be able to rename a playlist
 - As a user, I want to be able to save my library and queue
 - As a user, I want to be able to load my library and queue
+
+##Phase 4: Task 2
+- Playlist class is now robust
+- The rename() method now throws an InvalidNameException if an empty name is passed 
