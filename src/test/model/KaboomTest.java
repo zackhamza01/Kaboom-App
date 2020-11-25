@@ -1,5 +1,6 @@
 package model;
 
+import exception.InvalidNameException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -40,11 +41,27 @@ class KaboomTest {
     }
 
     @Test
-    void testRenamePlaylist() {
+    void testRenamePlaylistWithException() {
         Playlist p = new Playlist("Memories");
         assertEquals("Memories", p.getPlaylistName());
-        p.rename("Nostalgia");
-        assertEquals("Nostalgia", p.getPlaylistName());
+        try {
+            p.rename("");
+            fail("Error. Exception should have been thrown!");
+        } catch (InvalidNameException e) {
+            //expected
+        }
+    }
+
+    @Test
+    void testRenamePlaylistWithoutException() {
+        Playlist p = new Playlist("Memories");
+        assertEquals("Memories", p.getPlaylistName());
+        try {
+            p.rename("Nostalgia");
+            assertEquals("Nostalgia", p.getPlaylistName());
+        } catch (InvalidNameException e) {
+            fail("Error. Exception should not have been thrown!");
+        }
     }
 
     @Test

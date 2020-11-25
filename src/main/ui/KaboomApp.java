@@ -1,5 +1,6 @@
 package ui;
 
+import exception.InvalidNameException;
 import model.*;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -80,7 +81,7 @@ public class KaboomApp {
     }
 
 
-    private void processCommand(String command) {
+    private void processCommand(String command)  {
         if (command.equals("library")) {
             displayLibraryMenu();
             command = input.nextLine();
@@ -150,11 +151,9 @@ public class KaboomApp {
         String name = input.nextLine();
 
         while (name.length() == 0) {
-            System.out.println("Name cannot be empty. Try again: ");
+            System.out.println("Name cannot be empty! Try again: ");
             name = input.nextLine();
         }
-
-        lib.addPlaylistToLibrary(new Playlist(name));
         System.out.println("Playlist successfully added to your library!");
     }
 
@@ -171,11 +170,21 @@ public class KaboomApp {
         System.out.println("Rename " + selectPlaylist(plselection).getPlaylistName() + " to: ");
         input = new Scanner(System.in);
         String name2 = input.nextLine();
-        while (name2.length() == 0) {
-            System.out.println("Name cannot be empty. Try another name!");
-            name2 = input.nextLine();
+        boolean runAgain = true;
+        while (runAgain) {
+            try {
+                lib.getLibrary().get(plselection).rename(name2);
+                runAgain = false;
+            } catch (InvalidNameException e) {
+                System.out.println("Name cannot be empty. Try another name!");
+                name2 = input.nextLine();
+            }
         }
-        lib.getLibrary().get(plselection).rename(name2);
+        //while (name2.length() == 0) {
+        //    System.out.println("Name cannot be empty. Try another name!");
+        //    name2 = input.nextLine();
+       //
+        //lib.getLibrary().get(plselection).rename(name2);
         System.out.println("Successfully renamed the playlist!");
     }
 

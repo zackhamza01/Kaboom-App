@@ -1,6 +1,7 @@
 package ui;
 
 
+import exception.InvalidNameException;
 import ui.gui.KaboomGUI;
 import ui.KaboomApp;
 
@@ -8,7 +9,7 @@ import java.io.FileNotFoundException;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        new KaboomGUI();
-        //new KaboomApp();
+        //new KaboomGUI();
+        new KaboomApp();
     }
 }

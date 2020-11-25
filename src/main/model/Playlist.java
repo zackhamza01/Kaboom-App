@@ -1,5 +1,6 @@
 package model;
 
+import exception.InvalidNameException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
@@ -27,7 +28,10 @@ public class Playlist implements SongList, Writable {
         return this.playlist;
     }
 
-    public void rename(String name) {
+    public void rename(String name) throws InvalidNameException {
+        if (name.length() == 0) {
+            throw new InvalidNameException();
+        }
         this.name = name;
     }
 

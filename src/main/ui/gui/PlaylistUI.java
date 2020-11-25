@@ -1,5 +1,6 @@
 package ui.gui;
 
+import exception.InvalidNameException;
 import model.*;
 
 import javax.swing.*;
@@ -108,7 +109,16 @@ public class PlaylistUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String newSongName = JOptionPane.showInputDialog("Enter the new playlist name: ");
-                playlist.rename(newSongName);
+                boolean runAgain = true;
+                while (runAgain) {
+                    try {
+                        playlist.rename(newSongName);
+                        runAgain = false;
+                    } catch (InvalidNameException x) {
+                        newSongName = JOptionPane.showInputDialog("Name cannot be empty! Try again!");
+                    }
+                }
+                //playlist.rename(newSongName);
                 JOptionPane.showMessageDialog(null,
                         "This playlist has been renamed to " + playlist.getPlaylistName() + "!");
             }
