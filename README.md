@@ -33,3 +33,7 @@
 ##Phase 4: Task 2
 - Playlist class is now robust
 - The rename() method now throws an InvalidNameException if an empty name is passed 
+##Phase 4: Task 3
+- Refactor the viewSongs() method in both the Playlist and Queue to make it only one method for both classes instead of two
+- Refactor many of the methods in the text-based UI and GUI of Kaboom since there is a lot of similarity between the two (an example includes the save and load methods)
+- Refactor some methods in the GUI because there is a lot of repeated methods in the classes I made for the GUI (an example includes the createButtons() method)
