@@ -1,29 +1,22 @@
-{"library": [{
-    "playlist": [
-        {
+{"library": [
+    {
+        "playlist": [
+            {
+                "artist": "Eminem",
+                "title": "Lose Yourself"
+            },
+            {
+                "artist": "The Weeknd",
+                "title": "AfterHours"
+            }
+        ],
+        "name": "Hip-Hop"
+    },
+    {
+        "playlist": [{
             "artist": "DaBaby",
             "title": "Suge"
-        },
-        {
-            "artist": "The Weeknd",
-            "title": "The Hills"
-        },
-        {
-            "artist": "Nav",
-            "title": "Hit"
-        },
-        {
-            "artist": "Eminem",
-            "title": "Lose Yourself"
-        },
-        {
-            "artist": "Roddy Rich",
-            "title": "High Fashion"
-        },
-        {
-            "artist": "The Weeknd",
-            "title": "AfterHours"
-        }
-    ],
-    "name": "Rap"
-}]}
+        }],
+        "name": "Rap"
+    }
+]}
