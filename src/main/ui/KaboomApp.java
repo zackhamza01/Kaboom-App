@@ -24,12 +24,14 @@ public class KaboomApp {
     private JsonReader jsonReader;
 
     // EFFECTS: runs the Kaboom application
+
     public KaboomApp() throws FileNotFoundException {
         runKaboom();
     }
 
     // MODIFIES: this
     // EFFECTS: processes user input
+
     private void runKaboom() {
         System.out.println("Welcome to the Kaboom App! Hope you enjoy :)");
         boolean keepGoing = true;
@@ -83,6 +85,7 @@ public class KaboomApp {
         System.out.println("\tdeletesong -> Delete a song from queue");
     }
 
+    // EFFECTS: processes user command after the main menu
 
     private void processCommand(String command)  {
         if (command.equals("library")) {
@@ -141,6 +144,7 @@ public class KaboomApp {
 
     // MODIFIES: this
     // EFFECTS: initializes Library, Queue, and sample Songs
+
     private void init() {
         lib = new Library();
         queue = new Queue();
@@ -195,6 +199,7 @@ public class KaboomApp {
 
     // MODIFIES: this
     // EFFECTS: Adds a song to a playlist of the user's choice
+
     private void addSongToPlaylist() {
         if (lib.getLibrary().isEmpty()) {
             System.out.println("There are no playlists in your library...");
@@ -210,7 +215,6 @@ public class KaboomApp {
         }
     }
 
-    // REQUIRES: Index to be a valid selection to a playlist in the given options
     // EFFECTS: Helper method to select a playlist based on user input
 
     private Playlist selectPlaylist(int index) {
@@ -222,6 +226,8 @@ public class KaboomApp {
 
     }
 
+    // EFFECTS: Helper method to select a song from playlist based on user input
+
     private Song selectSongInPlaylist(int index, Playlist pl) {
         if (index >= 0) {
             return pl.getPlaylist().get(index);
@@ -229,6 +235,8 @@ public class KaboomApp {
             return null;
         }
     }
+
+    // EFFECTS: Helper method to select a song from queue based on user input
 
     private Song selectSongInQueue(int index) {
         if (index >= 0) {
@@ -238,7 +246,6 @@ public class KaboomApp {
         }
     }
 
-    // REQUIRES: User to enter a valid selection
     // MODIFIES: this
     // EFFECTS: Adds a song either to a playlist or the queue,
     //            depending on the parameter
@@ -312,7 +319,7 @@ public class KaboomApp {
         queue.addPlaylistToQueue(selectPlaylist(plselection));
         System.out.println(selectPlaylist(plselection).getPlaylistName() + " has been added to queue");
     }
-    // REQUIRES: User to enter an appropriate number for playlist and at least one playlist in library
+
     // MODIFIES: this
     // EFFECTS: Same as the previous method, but the songs in the playlist are now shufflled
 
@@ -363,12 +370,18 @@ public class KaboomApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: Prompts the user to pick a playlist to delete in library
+
     private void deleteLibraryPlaylist() {
         int num = playlistSelection();
         String plname = selectPlaylist(num).getPlaylistName();
         lib.deletePlaylist(selectPlaylist(num));
         System.out.println(plname + " has been successfully deleted from your library!");
     }
+
+    // MODIFIES: this
+    // EFFECTS: First asks the user to choose a playlist, then to pick a song from that chosen playlist to remove
 
     private void deleteSongLibrary() {
         Scanner input = new Scanner(System.in);
@@ -384,6 +397,9 @@ public class KaboomApp {
         System.out.println(songdesc + " has been successfully deleted from " + temp.getPlaylistName() + "!");
     }
 
+    // MODIFIES: this
+    // EFFECTS: Prompts the user to remove a song from queue
+
     private void deleteSongQueue() {
         Scanner input = new Scanner(System.in);
         System.out.println("Select a song from queue:");
@@ -395,6 +411,8 @@ public class KaboomApp {
         queue.removeSong(selectSongInQueue(index));
         System.out.println(songdesc + " has been successfully removed from queue!");
     }
+
+    // EFFECTS: Helper method to prompt user to pick a playlist from library
 
     private int playlistSelection() {
         Scanner input = new Scanner(System.in);
