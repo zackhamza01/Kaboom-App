@@ -284,6 +284,8 @@ public class KaboomApp {
         }
     }
 
+    // EFFECTS: Helper method for when the user wants to add a custom song of their choice
+
     private Song custom() {
         input = new Scanner(System.in);
         System.out.println("Name of the song: ");

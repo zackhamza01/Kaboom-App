@@ -1,6 +1,6 @@
-#Kaboom Music Application
+# Kaboom Music Application
 
-##Purpose
+## Purpose
 
 **What will my application do?**
 - This application will allow users to create *playlists*
@@ -15,7 +15,7 @@
 - This is a good opportunity for me to show *future employers* what my coding capabilities are
 - This project can potentially be a stepping stone for a career in application development
 
-##User Stories
+## User Stories
 - As a user, I want to be able to create a playlist
 - As a user, I want to be able to add songs to an existing playlist
 - As a user, I want to be able to make a queue to play songs
@@ -29,11 +29,13 @@
 - As a user, I want to be able to rename a playlist
 - As a user, I want to be able to save my library and queue
 - As a user, I want to be able to load my library and queue
+- As a user, I want to be able to delete songs from my playlists (inside the library) or in the queue
+- As a user, I want to be able to delete playlists from my library
 
-##Phase 4: Task 2
+## Phase 4: Task 2
 - Playlist class is now robust
 - The rename() method now throws an InvalidNameException if an empty name is passed 
-##Phase 4: Task 3
+## Phase 4: Task 3
 - Refactor the viewSongs() method in both the Playlist and Queue to make it only one method for both classes instead of two
 - Refactor many of the methods in the text-based UI and GUI of Kaboom since there is a lot of similarity between the two (an example includes the save and load methods)
 - Refactor some methods in the GUI because there is a lot of repeated methods in the classes I made for the GUI (an example includes the createButtons() method)
