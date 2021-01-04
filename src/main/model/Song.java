@@ -3,6 +3,8 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.util.Objects;
+
 public class Song implements Writable {
     private String title;   //the song title
     private String artist;  //the song artist's name
@@ -39,5 +41,23 @@ public class Song implements Writable {
         json.put("title", title);
         json.put("artist", artist);
         return json;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Song song = (Song) o;
+        return Objects.equals(title, song.title)
+                && Objects.equals(artist, song.artist);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, artist);
     }
 }

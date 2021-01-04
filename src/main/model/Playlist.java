@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Playlist implements SongList, Writable {
     private String name;    //The name of the playlist
@@ -59,23 +60,13 @@ public class Playlist implements SongList, Writable {
      * EFFECTS: The method checks if the Song object is in the playlist,
      *          then removes it if found.
      */
- /*   @Override
+    @Override
     public void removeSong(Song song) {
         if (this.playlist.contains(song))  {
             this.playlist.remove(song);
         }
     }
-*/
-    /*
-    @Override
-    public void removeSong(String name) {
-        for (Song song: this.playlist) {
-            if (song.getTitle().equals(name)) {
-                this.playlist.remove(song);
-            }
-        }
-    }
-    */
+
 
     /*
      * EFFECTS: Number of songs in playlist will be returned
@@ -115,6 +106,24 @@ public class Playlist implements SongList, Writable {
         }
 
         return jsonArray;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Playlist playlist1 = (Playlist) o;
+        return name.equals(playlist1.name)
+                && playlist.equals(playlist1.playlist);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, playlist);
     }
 }
 

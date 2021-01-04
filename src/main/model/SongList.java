@@ -9,7 +9,5 @@ public interface SongList {
 
     void addSong(String name, String artist);
 
-   // void removeSong(Song song);
-
-  //  void removeSong(String name);
+    void removeSong(Song song);
 }

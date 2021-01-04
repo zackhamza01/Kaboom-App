@@ -80,23 +80,14 @@ public class Queue implements SongList, Writable {
      * EFFECTS: The method checks if the Song object is in the queue,
      *          then removes it if found.
      */
-/*
+
     @Override
     public void removeSong(Song song) {
         if (this.queue.contains(song)) {
             this.queue.remove(song);
         }
     }
-/*
-    @Override
-    public void removeSong(String name) {
-        for (Song s: this.queue) {
-            if (s.getTitle().equals(name)) {
-                this.queue.remove(s);
-            }
-        }
-    }
-*/
+
     /*
      * REQUIRES: queue.size() > 0, in other words there should be at least one song remaining in queue
      * MODIFIES: this

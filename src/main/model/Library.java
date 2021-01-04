@@ -37,7 +37,7 @@ public class Library implements Writable {
      * EFFECTS: This methods first checks if the playlist exists in the library.
      *          If it does, the method removes the playlist from the library.
      */
-/*
+
     public void deletePlaylist(Playlist playlist) {
         if (this.library.contains(playlist)) {
             library.remove(playlist);
